@@ -1,9 +1,18 @@
+import ThemeProvider from '@/providers/ThemeProvider';
+import Header from '@/modules/header';
+import Footer from '@/modules/footer';
 
-import Home from '@/pages/Home';
+import Home from '@/pages/home';
 
 const App = () => {
   return (
-    <Home />
+    <ThemeProvider>
+      <div className="grid grid-rows-[auto_1fr_auto] h-screen">
+        <Header />
+        <Home />
+        <Footer />
+      </div>
+    </ThemeProvider>
   )
 }
 
