@@ -1,6 +1,8 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import GameTab from "@/modules/game/game-tab";
+
 const Home = () => {
   return (
     <div className='mx-auto mx-w-5xl px-4 py-6'>
@@ -26,7 +28,7 @@ const Home = () => {
             </TabsTrigger>
         </TabsList>
         <TabsContent value="game" className="mt-0">
-          <p>Game content goes here...</p>
+          <GameTab />
         </TabsContent>
         <TabsContent value="history" className="mt-0">
           <p>History content goes here...</p>
