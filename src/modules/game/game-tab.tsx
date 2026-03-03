@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import CoinFlip from "./coinflip";
-
+import CurrencySelector from "./currency-selector";
 
 const GameTab = () => {
     return (
@@ -15,7 +15,7 @@ const GameTab = () => {
             <div className="flex flex-col gap-4">
                 <Card className='border-border/50 bg-card/60 backdrop-blur-sm min-w-lg'>
                     <CardContent className='flex flex-col gap-5 pt-6'>
-                        <p>History content goes here...</p>
+                       <CurrencySelector />
                     </CardContent>
                 </Card>
             </div>
