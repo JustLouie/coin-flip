@@ -27,6 +27,7 @@ const CurrencySelector = () =>{
                             selectedCurrency === currency &&
                                 "bg-primary shadow-[0_0_12px_rgba(251,191,36,0.2)]"
                         )}
+                        key={currency}
                     >
                         <span
                             className={cn(

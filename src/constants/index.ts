@@ -1,5 +1,13 @@
 import { type Currency } from "./types"
 
+export const INITIAL_BALANCES: Record<Currency, number> = {
+  BTC: 1000,
+  ETH: 1000,
+  SOL: 1000,
+};
+
+export const INITIAL_SELECTED_CURRENCY: Currency = "BTC";
+
 export const ALL_CURRENCIES: Currency[] = ["BTC", "ETH", "SOL"];
 export const CURRENCY_COLORS: Record<Currency, string> = {
   BTC: "text-amber-400",

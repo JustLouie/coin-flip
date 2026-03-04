@@ -1,8 +1,11 @@
 import { ALL_CURRENCIES, CURRENCY_COLORS, CURRENCY_CONFIG } from "@/constants"
 import { cn } from "@/lib/utils"
+import { useGameContext } from "@/contexts/GameProvider"
 
 
 const Header = () => {
+    const { balances } = useGameContext()
+
     return (
         <header className="sticky top-0 z-50 border-b border-gray-400 bg-background/80 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
@@ -27,7 +30,7 @@ const Header = () => {
                                 {CURRENCY_CONFIG[currency].icon} {currency}
                             </span>
                             <span className="font-mono text-xs text-foreground">
-                                1000
+                                {balances[currency]}
                             </span>
                         </div>
                     ))}
