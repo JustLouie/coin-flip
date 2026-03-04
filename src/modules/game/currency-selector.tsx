@@ -1,11 +1,10 @@
 import { CURRENCY_CONFIG, ALL_CURRENCIES, CURRENCY_COLORS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
+import { useGameContext } from "@/contexts/GameProvider";
 
 const CurrencySelector = () =>{
-
-    const selectedCurrency = "BTC";
+    const { selectedCurrency } = useGameContext();
     const isFlipping = false;
 
     return (

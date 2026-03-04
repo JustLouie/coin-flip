@@ -36,3 +36,5 @@ export const CURRENCY_CONFIG: Record<
     icon: "◎",
   },
 };
+
+export const MIN_BET = 10;

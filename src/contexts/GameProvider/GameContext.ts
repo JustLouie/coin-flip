@@ -2,12 +2,20 @@ import {
   createContext,
   useContext
 } from "react";
-
-import type { Currency } from "@/constants/types";
+import type { Currency, CoinSide, CoinFlipResult } from "@/constants/types";
 
 interface GameContextValue {
   selectedCurrency: Currency;
   balances: Record<Currency, number>;
+  chosenSide: CoinSide | null;
+  isFlipping: boolean;
+  betAmount: number;
+  lastResult: CoinFlipResult | null;
+  setChosenSide: (s: CoinSide | null) => void;
+  setBetAmount: (amount: number) => void;
+  setIsFlipping: (flipping: boolean) => void;
+  updateBalance: (currency: Currency, newBalance: number) => void;
+  setLastResult: (r: CoinFlipResult | null) => void;
 }
 
 export const GameContext = createContext<GameContextValue | undefined>(undefined);

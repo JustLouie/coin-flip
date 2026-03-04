@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import CoinFlip from "./coinflip";
 import CurrencySelector from "./currency-selector";
+import BetControls from "./bet-control";
 
 const GameTab = () => {
     return (
@@ -16,6 +17,7 @@ const GameTab = () => {
                 <Card className='border-border/50 bg-card/60 backdrop-blur-sm min-w-lg'>
                     <CardContent className='flex flex-col gap-5 pt-6'>
                        <CurrencySelector />
+                       <BetControls />
                     </CardContent>
                 </Card>
             </div>

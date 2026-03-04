@@ -1,23 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useGameContext } from "@/contexts/GameProvider";
 
 const CoinFlip = () => {
+    const { isFlipping, lastResult } = useGameContext();
 
-    const [isFlipping, setIsFlipping] = useState<boolean>(true);
     const [landedSide, setLandedSide] = useState<"heads" | "tails" | null>(null);
 
+    const flipKey = useRef(0);
+
+    const showResult = !isFlipping && lastResult;
+    const isWin = lastResult?.outcome === "win";
+
     useEffect(() => {
-        const flipDuration = 1500;
-        const flipTimeout = setTimeout(() => {
-            setIsFlipping(false);
-            const result = Math.random() < 0.5 ? "heads" : "tails";
-            setLandedSide(result);
-        }, flipDuration);
-        return () => clearTimeout(flipTimeout);
-    }, []);
+        if (lastResult?.side) {
+            setLandedSide(lastResult.side);
+        }
+    }, [lastResult]);
+
+    
+    useEffect(() => {
+        if (isFlipping) {
+            flipKey.current += 1;
+        }
+    }, [isFlipping]);
 
 
-     const getAnimationClass = () => {
+    const getAnimationClass = () => {
         if (isFlipping) {
             return landedSide === "tails"
                 ? "animate-coin-flip-tails"
@@ -65,6 +74,43 @@ const CoinFlip = () => {
                         <div className="absolute inset-2 rounded-full border-2 border-slate-200/40" />
                     </div>
                 </div>
+            </div>
+            <div className="flex h-16 items-center justify-center">
+                {isFlipping && (
+                    <p className="animate-pulse text-sm font-medium text-muted-foreground">
+                        Flipping...
+                    </p>
+                )}
+                {showResult && (
+                    <div
+                        className={cn(
+                            "flex flex-col items-center gap-1 animate-in fade-in zoom-in-95 duration-300",
+                            isWin ? "text-emerald-400" : "text-red-400"
+                        )}
+                    >
+                        <p className="text-2xl font-bold">
+                            {isWin ? "YOU WIN!" : "YOU LOSE"}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Landed on{" "}
+                            <span className="font-semibold text-foreground">
+                                {lastResult.side.toUpperCase()}
+                            </span>
+                            {isWin && (
+                                <span className="text-emerald-400">
+                                    {" "}
+                                    +{lastResult.bet.profit.toFixed(2)}{" "}
+                                    {lastResult.bet.currency}
+                                </span>
+                            )}
+                        </p>
+                    </div>
+                )}
+                {!isFlipping && !lastResult && (
+                    <p className="text-sm text-muted-foreground">
+                        Place a bet and flip the coin
+                    </p>
+                )}
             </div>
         </div>
     )
