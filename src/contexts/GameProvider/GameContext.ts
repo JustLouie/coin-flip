@@ -16,6 +16,7 @@ interface GameContextValue {
   setIsFlipping: (flipping: boolean) => void;
   updateBalance: (currency: Currency, newBalance: number) => void;
   setLastResult: (r: CoinFlipResult | null) => void;
+  setSelectedCurrency: (c: Currency) => void;
 }
 
 export const GameContext = createContext<GameContextValue | undefined>(undefined);

@@ -47,6 +47,9 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
       dispatch({ type: "SET_LAST_RESULT", payload: result });
   }
 
+  const setSelectedCurrency = (c: Currency) => {
+      dispatch({ type: "SET_CURRENCY", payload: c });
+  }
 
   useEffect(() => {
     if (user) {
@@ -63,7 +66,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         setChosenSide,
         setIsFlipping,
         setBetAmount,
-        setLastResult
+        setLastResult,
+        setSelectedCurrency
       }}
     >
       {children}

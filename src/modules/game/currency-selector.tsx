@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useGameContext } from "@/contexts/GameProvider";
 
 const CurrencySelector = () =>{
-    const { selectedCurrency } = useGameContext();
+    const { selectedCurrency, setSelectedCurrency } = useGameContext();
     const isFlipping = false;
 
     return (
@@ -20,7 +20,7 @@ const CurrencySelector = () =>{
                         }
                         size="sm"
                         disabled={isFlipping}
-                        onClick={() => {}}
+                        onClick={() => setSelectedCurrency(currency)}
                         className={cn(
                             "flex-1 gap-2 font-mono transition-all ",
                             selectedCurrency === currency &&
