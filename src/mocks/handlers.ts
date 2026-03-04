@@ -1,6 +1,6 @@
 import { http, HttpResponse, delay } from 'msw';
 import { db } from './db';
-import type { Bet, CoinFlipRequest, CoinFlipResult } from '@/constants/types';
+import type { Bet, CoinFlipRequest, CoinFlipResult, BetHistoryResponse } from '@/constants/types';
 
 export const handlers = [
     http.get('/api/user', async () => {
@@ -52,6 +52,8 @@ export const handlers = [
             timestamp: new Date().toISOString(),
         };
 
+        db.saveBet(bet);
+
         const result: CoinFlipResult = {
             outcome,
             side,
@@ -60,5 +62,47 @@ export const handlers = [
         };
 
         return HttpResponse.json(result);
+    }),
+
+    http.get('/api/bet-history', async ({ request }) => {
+        await delay(200);
+
+        const url = new URL(request.url);
+        const outcome = url.searchParams.get("outcome");
+        const minAmount = url.searchParams.get("minAmount");
+        const maxAmount = url.searchParams.get("maxAmount");
+        const currency = url.searchParams.get("currency");
+
+        let bets = db.getBetHistory();
+
+        // Apply filters
+        if (outcome && outcome !== "all") {
+            bets = bets.filter((b: { outcome: string; }) => b.outcome === outcome);
+        }
+
+        if (currency && currency !== "all") {
+            bets = bets.filter((b: { currency: string; }) => b.currency === currency);
+        }
+
+        if (minAmount) {
+            const min = parseFloat(minAmount);
+            if (!isNaN(min)) {
+                bets = bets.filter((b: { amount: number; }) => b.amount >= min);
+            }
+        }
+
+        if (maxAmount) {
+            const max = parseFloat(maxAmount);
+            if (!isNaN(max)) {
+                bets = bets.filter((b: { amount: number; }) => b.amount <= max);
+            }
+        }
+
+        const response: BetHistoryResponse = {
+            bets,
+            total: bets.length,
+        };
+
+        return HttpResponse.json(response);
     }),
 ]

@@ -30,3 +30,14 @@ export interface CoinFlipRequest {
 
 
 export type CoinSide = "heads" | "tails";
+
+
+export interface BetHistoryResponse {
+  bets: Bet[];
+  total: number;
+}
+
+export interface BetFilters {
+  outcome: "all" | "win" | "loss";
+  currency: "all" | Currency;
+}

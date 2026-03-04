@@ -1,5 +1,5 @@
 import { INITIAL_BALANCES, INITIAL_SELECTED_CURRENCY } from "@/constants";
-import type { Currency, UserData } from "@/constants/types";
+import type { Bet, Currency, UserData } from "@/constants/types";
 
 const DEFAULT_USER_DATA = {
     balances: INITIAL_BALANCES,
@@ -24,7 +24,23 @@ const updateBalance = (currency: Currency, newBalance: number): UserData => {
 }
 
 
+const getBetHistory = () => {
+    const storedData = localStorage.getItem('bet-history');
+    return storedData ? JSON.parse(storedData) : [];
+
+}
+
+const saveBet = (bet: Bet) => {
+    const history = getBetHistory();
+    const updated = [bet, ...history].slice(0, 20);
+    localStorage.setItem('bet-history', JSON.stringify(updated));
+    return updated;
+}
+
+
 export const db = {
     getUserData,
-    updateBalance
+    updateBalance,
+    getBetHistory,
+    saveBet
 }
