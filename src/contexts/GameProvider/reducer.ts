@@ -8,6 +8,11 @@ type GameAction =
   | { type: "SET_BALANCES"; payload: Record<Currency, number> }
   | { type: "UPDATE_BALANCE"; currency: Currency; newBalance: number }
   | { type: "SET_LAST_RESULT"; payload: CoinFlipResult | null }
+  | { type: "SET_AUTO_BET_ENABLED"; payload: boolean }
+  | { type: "SET_ROUND_NUMBERS"; payload: number }
+  | { type: "SET_AUTO_BETTING"; payload: boolean }
+  | { type: "SET_AUTO_BET_ROUND"; payload: number };
+
 
 export interface InitialStateType {
   selectedCurrency: Currency;
@@ -16,6 +21,10 @@ export interface InitialStateType {
   isFlipping: boolean;
   betAmount: number;
   lastResult: CoinFlipResult | null;
+  autoBetEnabled: boolean,
+  isAutoBetting: boolean,
+  autoBetCurrentRound: number,
+  numberOfRounds: number
 }
 
 
@@ -44,6 +53,22 @@ const gameReducer = (state: InitialStateType, action: GameAction): InitialStateT
 
     case "SET_LAST_RESULT":
       return { ...state, lastResult: action.payload };
+
+    case "SET_AUTO_BET_ENABLED":
+      return { ...state, autoBetEnabled: action.payload };
+
+    case "SET_ROUND_NUMBERS":
+      return {
+        ...state,
+        numberOfRounds: action.payload,
+      };
+      
+    case "SET_AUTO_BETTING":
+      return { ...state, isAutoBetting: action.payload };
+
+    case "SET_AUTO_BET_ROUND":
+      return { ...state, autoBetCurrentRound: action.payload };
+
     default:
       return state;
   }

@@ -12,11 +12,15 @@ import gameReducer, { type InitialStateType } from "./reducer";
 
 const initialState: InitialStateType = {
   selectedCurrency: INITIAL_SELECTED_CURRENCY,
+  balances: { ...INITIAL_BALANCES },
   betAmount: MIN_BET,
   chosenSide: null,
   isFlipping: false,
-  balances: { ...INITIAL_BALANCES },
   lastResult: null,
+  autoBetCurrentRound: 0,
+  numberOfRounds: 10,
+  autoBetEnabled: false,
+  isAutoBetting: false,
 };
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +55,23 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
       dispatch({ type: "SET_CURRENCY", payload: c });
   }
 
+  const setAutoBetEnabled = (enable: boolean) => {
+      dispatch({ type: "SET_AUTO_BET_ENABLED", payload: enable });
+  }
+
+  const setNumberOfRounds = (round: number) => {
+      dispatch({ type: "SET_ROUND_NUMBERS", payload: round });
+  }
+
+  const setIsAutoBetting = (enable: boolean) => {
+      dispatch({ type: "SET_AUTO_BETTING", payload: enable });
+  }
+
+  const setAutoBetCurrentRound = (round: number) => {
+      dispatch({ type: "SET_AUTO_BET_ROUND", payload: round });
+  }
+
+
   useEffect(() => {
     if (user) {
       setUserBalance(user);
@@ -67,7 +88,11 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         setIsFlipping,
         setBetAmount,
         setLastResult,
-        setSelectedCurrency
+        setSelectedCurrency,
+        setAutoBetEnabled,
+        setNumberOfRounds,
+        setIsAutoBetting,
+        setAutoBetCurrentRound
       }}
     >
       {children}

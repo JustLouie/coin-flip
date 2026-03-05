@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import CoinFlip from "./coinflip";
 import CurrencySelector from "./currency-selector";
 import BetControls from "./bet-control";
+import AutoBet from "./auto-bet";
 
 const GameTab = () => {
     return (
@@ -20,6 +21,7 @@ const GameTab = () => {
                        <BetControls />
                     </CardContent>
                 </Card>
+                <AutoBet />
             </div>
         </div>
     )
