@@ -40,4 +40,15 @@ export interface BetHistoryResponse {
 export interface BetFilters {
   outcome: "all" | "win" | "loss";
   currency: "all" | Currency;
+  amount: string
+}
+
+export interface BetStatistics {
+  total: number;
+  wins: number;
+  losses: number;
+  winRate: number;
+  biggestWin: number;
+  biggestLoss: number;
+  profitLoss: Record<Currency, number>;
 }

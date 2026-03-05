@@ -69,8 +69,7 @@ export const handlers = [
 
         const url = new URL(request.url);
         const outcome = url.searchParams.get("outcome");
-        const minAmount = url.searchParams.get("minAmount");
-        const maxAmount = url.searchParams.get("maxAmount");
+        const amount = url.searchParams.get("amount");
         const currency = url.searchParams.get("currency");
 
         let bets = db.getBetHistory();
@@ -84,17 +83,10 @@ export const handlers = [
             bets = bets.filter((b: { currency: string; }) => b.currency === currency);
         }
 
-        if (minAmount) {
-            const min = parseFloat(minAmount);
-            if (!isNaN(min)) {
-                bets = bets.filter((b: { amount: number; }) => b.amount >= min);
-            }
-        }
-
-        if (maxAmount) {
-            const max = parseFloat(maxAmount);
-            if (!isNaN(max)) {
-                bets = bets.filter((b: { amount: number; }) => b.amount <= max);
+        if (amount) {
+            const am = parseFloat(amount);
+            if (!isNaN(am)) {
+                bets = bets.filter((b: { balanceAfter: number; }) => b.balanceAfter === am);
             }
         }
 

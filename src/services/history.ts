@@ -5,6 +5,7 @@ export const getHistory = async (filters: BetFilters) => {
     const params = new URLSearchParams();
     if (filters.currency !== "all") params.set("currency", filters.currency);
     if (filters.outcome !== "all") params.set("outcome", filters.outcome);
+    if (filters.amount) params.set("amount", filters.amount);
 
     const requestUrl = `/api/bet-history?${params.toString()}`;
     const response = await axios.get(requestUrl);

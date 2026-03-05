@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import HistoryRow from "./history-row";
+import { Input } from "@/components/ui/input";
 import useBetHistory from "@/hooks/useBetHistory";
 
 
@@ -22,7 +23,7 @@ const HistoryTab = () => {
   }
 
   return (
-    <Card className="min-w-[1050px] border-none">
+    <Card className="w-full border-none">
       <CardHeader>
         <CardTitle>Bet History</CardTitle>
         <div className='flex flex-wrap items-center justify-between gap-3 pt-2'>
@@ -86,6 +87,20 @@ const HistoryTab = () => {
             >
               Losses
             </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="whitespace-nowrap text-xs text-muted-foreground">
+              Amount:
+            </span>
+            <Input
+              type="number"
+              value={filters.amount}
+              onChange={(e) => updateFilter({ amount: e.target.value })}
+              placeholder="0.00"
+              className="h-8 w-50 bg-background font-mono text-xs"
+              step="1"
+              min={0}
+            />
           </div>
         </div>
       </CardHeader>

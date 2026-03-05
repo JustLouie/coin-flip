@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import GameTab from "@/modules/game/game-tab";
 import HistoryTab from "@/modules/history/history-tab";
+import StatisticsTab from "@/modules/statistics/statistics-tab";
 
 const Home = () => {
   return (
@@ -31,11 +32,11 @@ const Home = () => {
         <TabsContent value="game" className="mt-0">
           <GameTab />
         </TabsContent>
-        <TabsContent value="history" className="mt-0">
+        <TabsContent value="history" className="mt-0 w-full md:w-3xl lg:w-6xl">
           <HistoryTab />
         </TabsContent>
         <TabsContent value="statistics" className="mt-0">
-          <p>Statistics content goes here...</p>
+          <StatisticsTab />
         </TabsContent>
       </Tabs>
     </div>
