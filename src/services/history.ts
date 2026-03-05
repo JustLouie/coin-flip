@@ -1,6 +1,8 @@
 import axios from "axios";
 import type { BetFilters } from "@/constants/types";
 
+
+// GET: All history from mock.
 export const getHistory = async (filters: BetFilters) => {
     const params = new URLSearchParams();
     if (filters.currency !== "all") params.set("currency", filters.currency);

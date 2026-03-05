@@ -29,12 +29,15 @@ const Home = () => {
                 Statistics
             </TabsTrigger>
         </TabsList>
+        {/* Game Tab */}
         <TabsContent value="game" className="mt-0">
           <GameTab />
         </TabsContent>
+        {/* History Tab */}
         <TabsContent value="history" className="mt-0 w-full md:w-3xl lg:w-6xl">
           <HistoryTab />
         </TabsContent>
+        {/* Statistics Tab */}
         <TabsContent value="statistics" className="mt-0">
           <StatisticsTab />
         </TabsContent>

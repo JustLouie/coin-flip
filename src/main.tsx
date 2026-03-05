@@ -8,7 +8,7 @@ import GameProvider from './contexts/GameProvider';
 
 import './index.css'
 
-
+// Wrap react render function with mock api worker.
 const renderWithMswWorker = async () => {
   if (import.meta.env.VITE_MOCK_API === 'true') {
     const { worker } = await import('./mocks/browser')

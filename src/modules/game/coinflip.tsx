@@ -5,6 +5,7 @@ import { useGameContext } from "@/contexts/GameProvider";
 const CoinFlip = () => {
     const { isFlipping, lastResult } = useGameContext();
 
+    // To define what will be the landed side of the coin
     const [landedSide, setLandedSide] = useState<"heads" | "tails" | null>(null);
 
     const flipKey = useRef(0);
@@ -18,14 +19,14 @@ const CoinFlip = () => {
         }
     }, [lastResult]);
 
-    
+    // Proecess to reset animation of the coin.
     useEffect(() => {
         if (isFlipping) {
             flipKey.current += 1;
         }
     }, [isFlipping]);
 
-
+    // To control animation classes and landed side classes
     const getAnimationClass = () => {
         if (isFlipping) {
             return landedSide === "tails"

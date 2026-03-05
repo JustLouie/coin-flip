@@ -1,4 +1,3 @@
-// import { useBetHistory } from "@/hooks/use-bet-history";
 import type { Bet, BetFilters } from "@/constants/types";
 import {ALL_CURRENCIES } from "@/constants";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,6 +26,7 @@ const HistoryTab = () => {
       <CardHeader>
         <CardTitle>Bet History</CardTitle>
         <div className='flex flex-wrap items-center justify-between gap-3 pt-2'>
+          {/* Filters by Currency */}
           <div className="flex gap-1.5">
             <Button
               variant={filters.currency === "all" ? "default" : "outline"}
@@ -54,6 +54,7 @@ const HistoryTab = () => {
               ))
             }
           </div>
+          {/* Filters by Outcome (win/loss) */}
           <div className="flex gap-1.5">
             <Button
               variant={filters.outcome === "all" ? "default" : "outline"}
@@ -88,6 +89,7 @@ const HistoryTab = () => {
               Losses
             </Button>
           </div>
+          {/* Filter by amount (balance after) */}
           <div className="flex items-center gap-2">
             <span className="whitespace-nowrap text-xs text-muted-foreground">
               Amount:

@@ -40,6 +40,7 @@ export const handlers = [
         ? currentBalance + betAfterWin
         : currentBalance - amount;
 
+        // Update user balance
         db.updateBalance(currency, newBalance);
 
         const bet: Bet = {
@@ -52,6 +53,7 @@ export const handlers = [
             timestamp: new Date().toISOString(),
         };
 
+        // To Save bet in History
         db.saveBet(bet);
 
         const result: CoinFlipResult = {

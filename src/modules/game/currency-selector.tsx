@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useGameContext } from "@/contexts/GameProvider";
 
 const CurrencySelector = () =>{
-    const { selectedCurrency, setSelectedCurrency } = useGameContext();
-    const isFlipping = false;
+    const { selectedCurrency, setSelectedCurrency, isFlipping } = useGameContext();
 
     return (
         <div className="flex flex-col gap-3">
